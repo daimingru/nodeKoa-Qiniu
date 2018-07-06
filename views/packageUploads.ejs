@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+  
+  <head>
+    <meta charset="UTF-8">
+    <title>欢迎页面-X-admin2.0</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="/css/font.css">
+    <link rel="stylesheet" href="/css/xadmin.css">
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="/lib/layui/layui.js" charset="utf-8"></script>
+    <script type="text/javascript" src="/js/xadmin.js"></script>
+    <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+    <!--[if lt IE 9]>
+      <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+      <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  
+  <body>
+    <div class="x-nav">
+      <span class="layui-breadcrumb">
+        <a href="javascript:void(0);"><%= title %></a>
+        <a href="javascript:void(0);"><%= crumbs %></a>
+      </span>
+      <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" href="javascript:location.replace(location.href);" title="刷新">
+        <i class="layui-icon" style="line-height:30px">ဂ</i></a>
+    </div>
+    <div class="x-body">
+      <form class="layui-form layui-form-pane" method="post" enctype="multipart/form-data" action="/admin/package/upload">
+
+        <div class="layui-form-item">
+          <label class="layui-form-label">包名</label>
+          <div class="layui-input-inline">
+            <input type="text" name="packageName" required lay-verify="required" placeholder="请输入包名" autocomplete="off" class="layui-input">
+          </div>
+          <div class="layui-inline">
+            <label class="layui-form-label">渠道名</label>
+            <div class="layui-input-inline">
+              <input type="text" name="channelName" lay-verify="required" autocomplete="off" class="layui-input">
+            </div>
+          </div>
+        </div>
+
+        <div class="layui-form-item">
+          <label class="layui-form-label">版本号</label>
+          <div class="layui-input-inline">
+            <input type="text" name="packageVice" required lay-verify="required" placeholder="上次版本 : <%= lastPackageInfo.version %>" autocomplete="off" class="layui-input">
+          </div>
+          <div class="layui-inline">
+            <label class="layui-form-label">渠道号</label>
+            <div class="layui-input-inline">
+              <input type="text" name="channelNum" lay-verify="required" autocomplete="off" class="layui-input">
+            </div>
+          </div>
+        </div>
+
+        <!--<div class="layui-form-item" pane="">-->
+          <!--<label class="layui-form-label">版本号自增</label>-->
+          <!--<div class="layui-input-block">-->
+            <!--<input type="checkbox" name="switch" lay-filter="switch" lay-skin="switch" lay-text="ON|OFF"><div class="layui-unselect layui-form-switch layui-form-onswitch" lay-skin="_switch"><em></em><i></i></div>-->
+          <!--</div>-->
+        <!--</div>-->
+
+        <div class="layui-form-item">
+          <label class="layui-form-label">最终包名</label>
+          <div class="layui-input-block">
+            <input type="text" name="packageTend" readonly lay-verify="required" value="okayplus-V2.4.8" class="layui-input theend">
+          </div>
+          <div class="layui-form-mid layui-word-aux"></div>
+        </div>
+
+        <div class="layui-form-item pos">
+          <input type="file" name="packageFile"class="filein layui-input" value="上传" />
+          <button type="button" class="layui-btn" id="test1" style="float:left;margin-right: 20px;">
+            <i class="layui-icon">&#xe67c;</i>请上传包
+          </button>
+            <div class="layui-form-mid bakName layui-word-aux"></div>
+        </div>
+
+        <div class="layui-form-item layui-form-text">
+          <label class="layui-form-label">备注</label>
+          <div class="layui-input-block">
+            <textarea name="packageMark" placeholder="请输入内容" class="layui-textarea packageMark"></textarea>
+          </div>
+        </div>
+
+        <div class="layui-form-item">
+          <div class="layui-input-block">
+            <input class="layui-btn" id="subfile" value="立即提交" readonly />
+            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+          </div>
+        </div>
+      </form>
+
+      <script>
+
+          $(function () {
+
+              var version = '<%= lastPackageInfo.packageVice %>';
+              if( version ){
+                  version = version.split('.');
+                  version.splice(-1,1,++version[version.length - 1]);
+              }
+              var hisinput= '';
+              $(document)
+
+                  .on('click','#subfile',function () {
+
+                    if( !$('input[name="packageName"]').val() || !$('input[name="packageVice"]').val() || !$('input[name="channelNum"]').val() ){
+                        layer.msg('请确认已经填写包名、版本号和渠道号', function(){});
+                        return false;
+                    }
+                    var formData = new FormData($(".layui-form")[0]);
+
+                    $.ajax({
+                        url: '/admin/package/upload',
+                        type: 'post',
+                        data: formData,
+                        contentType: false,
+                        beforeSend: () => { layer.load(1, {
+                            shade: [0.4,'#000']
+                        }); },
+                        processData:false
+                    })
+                        .done(data => {
+                            layer.msg(data.msg);
+                            layer.closeAll('loading');
+                        })
+                  })
+                  .on('input','input[name="packageVice"],input[name="packageName"],input[name="channelNum"]',function () {
+
+                      changeVal();
+                      hisinput = $('input[name="packageVice"]').val();
+
+                  })
+                  .on('input','input[name="packageFile"]', function () {
+                      $('.bakName').html($(this).val());
+                  })
+
+                  // layui.use(['form', 'layedit', 'laydate'], function() {
+                  //
+                  //     var form = layui.form
+                  //     //监听指定开关
+                  //     form.on('switch(switch)', function (data) {
+                  //
+                  //         this.checked ? $('input[name="packageVice"]').val(version.join('.')) : $('input[name="packageVice"]').val(hisinput);
+                  //         changeVal();
+                  //
+                  //     });
+                  //
+                  // });
+              
+                  function changeVal() {
+
+                      $('input[name="packageTend"]').val(
+                          $('input[name="packageName"]').val() + '-' +
+                          $('input[name="packageVice"]').val() + '-' +
+                          $('input[name="channelNum"]').val()
+                      )
+
+
+                  }
+
+
+
+          })
+      </script>
+
+    </div>
+
+  </body>
+
+</html>

@@ -1,0 +1,75 @@
+{
+	"history": [{
+		"version": "V2.5.1",
+		"id": 2,
+		"channe": [{
+			"key": "okayplus-V2.5.1-301.apk",
+			"hash": "lvzvpwgLAIq9LKRpHkfKEEUC49l7",
+			"packageTend": "okayplus-V2.5.1-301",
+			"channelNum": "301",
+			"channelName": "家长帮",
+			"packageVice": "V2.5.1",
+			"packageMark": "将张榜注释备注",
+			"creatTime": 1530760367021
+		}]
+	}, {
+		"channe": [{
+			"key": "okayplus-V2.4.1-202.apk",
+			"hash": "lvzvpwgLAIq9LKRpHkfKEEUC49l7",
+			"packageTend": "okayplus-V2.4.1-202",
+			"channelNum": "202",
+			"channelName": "应用渠道",
+			"packageVice": "V2.4.1",
+			"packageMark": "应用渠道备注",
+			"creatTime": 1530760105696
+		}],
+		"version": "V2.4.1",
+		"id": 1
+	}, {
+		"id": 3,
+		"channe": [{
+			"key": "okayplus-V2.6.1-12.apk",
+			"hash": "lvzvpwgLAIq9LKRpHkfKEEUC49l7",
+			"packageTend": "okayplus-V2.6.1-12",
+			"channelNum": "12",
+			"channelName": "应用宝",
+			"packageVice": "V2.6.1",
+			"packageMark": "应用宝",
+			"creatTime": 1530760367021
+		}, {
+			"key": "okayplus-V2.6.1-16.apk",
+			"hash": "lvzvpwgLAIq9LKRpHkfKEEUC49l7",
+			"packageTend": "okayplus-V2.6.1-16",
+			"channelNum": "16",
+			"channelName": "黄健健",
+			"packageVice": "V2.6.1",
+			"packageMark": "应用宝黄健健",
+			"creatTime": 1530760543749
+		}],
+		"version": "V2.6.1"
+	}, {
+		"version": "V2.7.1",
+		"channe": [{
+			"key": "okayplus--V2.7.1-333-kiss",
+			"hash": "lvzvpwgLAIq9LKRpHkfKEEUC49l7",
+			"packageTend": "okayplus--V2.7.1-333",
+			"channelNum": "333",
+			"channelName": "七牛测试渠道",
+			"packageVice": "V2.7.1",
+			"packageMark": "七牛测试备注",
+			"creatTime": 1530784668608
+		}]
+	}, {
+		"version": "V2.7.2",
+		"channe": [{
+			"key": "okayplus-V2.7.2-555.apk",
+			"hash": "lvzvpwgLAIq9LKRpHkfKEEUC49l7",
+			"packageTend": "okayplus-V2.7.2-555",
+			"channelNum": "555",
+			"channelName": "阿里巴巴",
+			"packageVice": "V2.7.2",
+			"packageMark": "阿里巴巴 包",
+			"creatTime": 1530843793305
+		}]
+	}]
+}
